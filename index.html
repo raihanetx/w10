@@ -467,24 +467,21 @@ src="https://www.facebook.com/tr?id=482675157669768&ev=PageView&noscript=1"
             color: white;
             padding: 0.3rem 0.6rem;
             border-radius: 15px;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 600;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .stock-out-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            top: 10px;
+            right: 10px;
+            background-color: #e74c3c;
             color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 10px 10px 0 0;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         
         .product-card-content {
@@ -622,7 +619,7 @@ src="https://www.facebook.com/tr?id=482675157669768&ev=PageView&noscript=1"
             margin-bottom: 1.5rem;
             border-top: 1px solid #eee;
             border-bottom: 1px solid #eee;
-            padding-top: 2rem;
+            padding-top: 0;
             padding-bottom: 2rem;
         }
 
@@ -1466,8 +1463,24 @@ src="https://www.facebook.com/tr?id=482675157669768&ev=PageView&noscript=1"
         }
 
         /* --- START OF MODIFIED REVIEW FORM STYLES --- */
-        .see-more-reviews-btn { display: block; width: 100%; margin-top: 1.5rem; padding: 0.8rem 1rem; background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
-        .see-more-reviews-btn:hover { background-color: var(--primary-color); color: white; }
+        .see-more-reviews-btn {
+            display: block;
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 0.5rem 0;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: none;
+            border-radius: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            text-align: center;
+        }
+        .see-more-reviews-btn:hover {
+            background-color: transparent;
+            color: #5a52a5; /* Darker shade of primary */
+        }
 
         .add-review-form-container {
             margin-top: 2.5rem;
@@ -3388,9 +3401,6 @@ Microsoft-এর অফিসিয়াল Activation Key, ইমেইলে ড
             let priceDisplay = `৳${formattedPrice}`;
 
             let durationInfoHTML = '';
-            if (product.category === 'subscription' && Array.isArray(product.durations) && product.durations.length > 0 && !isFeaturedCard) {
-                durationInfoHTML = `<p class="product-card-duration">Duration: ${product.durations[0].label}</p>`;
-            }
             const tempDiv = document.createElement('div'); tempDiv.appendChild(imageContainer);
             card.innerHTML = `${tempDiv.innerHTML}<div class="product-card-content"><div class="product-card-header"><h3>${product.name || 'Unnamed Product'}</h3></div><p class="description">${product.description || 'No description available.'}</p>${durationInfoHTML}<div class="price">${priceDisplay}</div><div class="product-actions">${buttonsHTML}</div></div>`;
             const buyNowButton = card.querySelector('.buy-now-card'); if (buyNowButton) { buyNowButton.addEventListener('click', (e) => { e.stopPropagation(); handleProductCardBuyNow(product.id); }); }
@@ -3561,7 +3571,7 @@ function renderReviews(product) {
             </div>
             <div id="descriptionTab" class="tab-content" style="display:block;">
                 <div class="expandable-content">
-                    <p>${product.longDescription || product.description || 'An exceptional digital product.'}</p>
+                    <p>${(product.longDescription || product.description || 'An exceptional digital product.').trim()}</p>
                 </div>
                 <button class="see-more-btn" onclick="toggleSeeMore(this, false)">Show More</button>
                 <button class="see-less-btn" onclick="toggleSeeMore(this, true)">See Less</button>
