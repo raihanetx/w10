@@ -1025,7 +1025,7 @@ src="https://www.facebook.com/tr?id=482675157669768&ev=PageView&noscript=1"
                 align-self: start;
             }
             .product-detail-main.no-duration {
-                height: auto !important;
+                height: auto;
             }
             .product-detail-title {
                 font-size: 1.8rem; /* Reduced font size for desktop */
@@ -3658,6 +3658,10 @@ function adjustProductDetailHeight() {
     const mainInfo = document.querySelector('#productDetailPage .product-detail-main');
 
     if (gallery && mainInfo && window.innerWidth >= 769) {
+        if (mainInfo.classList.contains('no-duration')) {
+            mainInfo.style.height = '';
+            return;
+        }
         requestAnimationFrame(() => {
             const galleryHeight = gallery.offsetHeight;
             if (galleryHeight > 0) {
